@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Machine extends Vertex {
-
     private final int ram;
     private final MachineType type;
-    private final List<Process> processes = new ArrayList<>();
+    // Initially machine does not contain any placed processes
+    private final List<Process> placedProcesses = new ArrayList<>();
 
     public Machine(Vector3d location, int ram, MachineType type) {
         super(location);
@@ -24,7 +24,7 @@ public class Machine extends Vertex {
         return type;
     }
 
-    public List<Process> getProcesses() {
-        return processes;
+    public List<Process> getPlacedProcesses() {
+        return placedProcesses;
     }
 }
