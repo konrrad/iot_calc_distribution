@@ -35,4 +35,8 @@ public abstract class FdgIterator {
     protected abstract void writeAttrDisplacements();
     protected abstract void writeRepDisplacements();
     protected abstract void updateLocations();
+
+    public List<Branch> getBranches() {
+        return branches;
+    }
 }
