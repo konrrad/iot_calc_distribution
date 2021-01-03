@@ -6,8 +6,8 @@ import java.util.List;
 
 public class SimpleFdgIterator extends FdgIterator{
 
-    public SimpleFdgIterator(List<Branch> branches) {
-        super(branches);
+    public SimpleFdgIterator(Branch branch) {
+        super(branch);
     }
 
     @Override

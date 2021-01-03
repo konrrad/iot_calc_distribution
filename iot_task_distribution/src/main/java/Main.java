@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         String inputData = "{}";
         String simulationData = new App(
-                new SimpleFdgIterator(List.of()),
+                new SimpleFdgIterator(null),
                 new LocalDataConverter(),
                 new SimulationDataConverter()
         ).run(inputData);
