@@ -4,7 +4,7 @@ import model.Branch;
 
 import java.util.List;
 
-public class SimpleFdgIterator extends FdgIterator{
+public class SimpleFdgIterator extends FdgIterator {
 
     public SimpleFdgIterator(Branch branch) {
         super(branch);
@@ -12,6 +12,13 @@ public class SimpleFdgIterator extends FdgIterator{
 
     @Override
     protected void writeAttrDisplacements() {
+        foreach(Machine m:getBranch().getMachines()){
+            foreach(Machine nM:getBranch().getMachines()){
+                if (m == nM) {
+
+                }
+            }
+        }
         // TODO: 12/31/2020 not implemented by Staszek
     }
 
