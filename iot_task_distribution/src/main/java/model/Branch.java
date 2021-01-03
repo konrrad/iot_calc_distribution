@@ -6,7 +6,7 @@ public class Branch {
     private Processing processing;
     private List<Machine> machines;
 
-    public Processing getProcessings() {
+    public Processing getProcessing() {
         return processing;
     }
 

@@ -1,8 +1,8 @@
 package services.fdg_iterators;
 
 import model.Branch;
-
-import java.util.List;
+import model.Machine;
+import model.Process;
 
 public class SimpleFdgIterator extends FdgIterator {
 
@@ -12,23 +12,47 @@ public class SimpleFdgIterator extends FdgIterator {
 
     @Override
     protected void writeAttrDisplacements() {
-        foreach(Machine m:getBranch().getMachines()){
-            foreach(Machine nM:getBranch().getMachines()){
-                if (m == nM) {
-
+        for (Machine m : branch.getMachines()) {
+            m.getDisplacement().set(0, 0, 0);
+            for (Machine nM : branch.getMachines()) {
+                if (m != nM) {
+                    m2mDisplacementWriter.writeAttrDisplacement(m, nM);
                 }
             }
         }
-        // TODO: 12/31/2020 not implemented by Staszek
+        for (Machine m : branch.getMachines()) {
+            m.getDisplacement().set(0, 0, 0);
+            for (Process p : branch.getProcessing().getProcesses()) {
+                m2pDisplacementWriter.writeAttrDisplacement(m, p);
+            }
+        }
     }
 
     @Override
     protected void writeRepDisplacements() {
-        // TODO: 12/31/2020 not implemented by Staszek
+        for (Machine m : branch.getMachines()) {
+            m.getDisplacement().set(0, 0, 0);
+            for (Machine nM : branch.getMachines()) {
+                if (m != nM) {
+                    m2mDisplacementWriter.writeRepDisplacement(m, nM);
+                }
+            }
+        }
+        for (Machine m : branch.getMachines()) {
+            m.getDisplacement().set(0, 0, 0);
+            for (Process p : branch.getProcessing().getProcesses()) {
+                m2pDisplacementWriter.writeRepDisplacement(m, p);
+            }
+        }
     }
 
     @Override
     protected void updateLocations() {
-        // TODO: 12/31/2020 not implemented by Staszek
+        for (Machine m : branch.getMachines()) {
+            m2mDisplacementWriter.updateLocation(m);
+        }
+        for (Process m : branch.getProcessing().getProcesses()) {
+            m2pDisplacementWriter.updateLocation(m);
+        }
     }
 }

@@ -12,18 +12,22 @@ public class M2PDisplacementWriter extends DisplacementWriter {
 
     @Override
     public void writeAttrDisplacement(Vertex v1, Vertex v2) {
-
+        Vector3d delta = new Vector3d(v1.getLocation());
+        delta.sub(v2.getLocation());
+        v1.getDisplacement().set(calcAttrForcesSub(v1.getLocation(), delta));
+        v2.getDisplacement().set(calcAttrForcesSum(v2.getLocation(), delta));
     }
 
     @Override
     public void writeRepDisplacement(Vertex v1, Vertex v2) {
-        Vector3d dif = new Vector3d(v1.getLocation());
-        dif.sub(v2.getLocation());
-        v1.getDisplacement().set(calcRepForcesSum());
+        Vector3d delta = new Vector3d(v1.getLocation());
+        delta.sub(v2.getLocation());
+        v1.getDisplacement().set(calcRepForcesSum(v1.getLocation(), delta));
     }
 
     @Override
     public void updateLocation(Vertex v) {
-        // TODO: 12/31/2020 not implemented by Staszek
+        v.getDisplacement().normalize();
+        v.getLocation().add(v.getDisplacement());
     }
 }

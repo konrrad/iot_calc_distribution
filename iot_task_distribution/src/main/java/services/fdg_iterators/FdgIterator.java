@@ -8,9 +8,9 @@ import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 import java.util.List;
 
 public abstract class FdgIterator {
-    private final Branch branch;
-    private final DisplacementWriter m2pDisplacementWriter;
-    private final DisplacementWriter m2mDisplacementWriter;
+    protected final Branch branch;
+    protected final DisplacementWriter m2pDisplacementWriter;
+    protected final DisplacementWriter m2mDisplacementWriter;
     private final int iterationsCount;
 
     public FdgIterator(Branch branch, DisplacementWriter m2pDisplacementWriter, DisplacementWriter m2mDisplacementWriter, int iterationsCount) {
@@ -31,6 +31,7 @@ public abstract class FdgIterator {
             updateLocations();
         }
     }
+
 
     protected abstract void writeAttrDisplacements();
     protected abstract void writeRepDisplacements();

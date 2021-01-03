@@ -21,35 +21,31 @@ public abstract class DisplacementWriter {
         return -(optimalDistance * optimalDistance) / delta;
     }
 
-    public double calcDispChange(double delta) {
-        return delta / Math.abs(delta) * attrForce(delta);
-    }
-
     protected Vector3d calcRepForcesSum(Vector3d v, Vector3d delta) {
-        double x = v.getX() + (delta.getX() / Math.abs(delta.getX)) * repulsiveForce(delta.getX());
-        double y = v.getY() + (delta.getY() / Math.abs(delta.getY)) * repulsiveForce(delta.getY());
-        double z = v.getZ() + (delta.getZ() / Math.abs(delta.getZ)) * repulsiveForce(delta.getZ());
+        double x = v.getX() + (delta.getX() / delta.length()) * repulsiveForce(delta.length());
+        double y = v.getY() + (delta.getY() / delta.length()) * repulsiveForce(delta.length());
+        double z = v.getZ() + (delta.getZ() / delta.length()) * repulsiveForce(delta.length());
         return new Vector3d(x, y, z);
     }
 
 
     protected Vector3d calcAttrForcesSum(Vector3d v, Vector3d delta) {
-        double x = v.getX() + (delta.getX() / Math.abs(delta.getX)) * attrForce(delta.getX());
-        double y = v.getY() + (delta.getY() / Math.abs(delta.getY)) * attrForce(delta.getY());
-        double z = v.getZ() + (delta.getZ() / Math.abs(delta.getZ)) * attrForce(delta.getZ());
-        return new Vector3d(x, y,
-    }
-
-    protected Vector3d calcAttrForcesSub(Vector3d v, Vector3d delta) {
-        double x = v.getX() - (delta.getX() / Math.abs(delta.getX)) * attrForce(delta.getX());
-        double y = v.getY() - (delta.getY() / Math.abs(delta.getY)) * attrForce(delta.getY());
-        double z = v.getZ() - (delta.getZ() / Math.abs(delta.getZ)) * attrForce(delta.getZ());
+        double x = v.getX() + (delta.getX() / delta.length()) * attrForce(delta.length());
+        double y = v.getY() + (delta.getY() / delta.length()) * attrForce(delta.length());
+        double z = v.getZ() + (delta.getZ() / delta.length()) * attrForce(delta.length());
         return new Vector3d(x, y, z);
     }
 
-    abstract void writeAttrDisplacement(Vertex v1, Vertex v2);
+    protected Vector3d calcAttrForcesSub(Vector3d v, Vector3d delta) {
+        double x = v.getX() - (delta.getX() / delta.length()) * attrForce(delta.length());
+        double y = v.getY() - (delta.getY() / delta.length()) * attrForce(delta.length());
+        double z = v.getZ() - (delta.getZ() / delta.length()) * attrForce(delta.length());
+        return new Vector3d(x, y, z);
+    }
 
-    abstract void writeRepDisplacement(Vertex v1, Vertex v2);
+    public abstract void writeAttrDisplacement(Vertex v1, Vertex v2);
 
-    abstract void updateLocation(Vertex v);
+    public abstract void writeRepDisplacement(Vertex v1, Vertex v2);
+
+    public abstract void updateLocation(Vertex v);
 }
