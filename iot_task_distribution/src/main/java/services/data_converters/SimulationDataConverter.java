@@ -7,13 +7,13 @@ import java.util.List;
 public class SimulationDataConverter implements DataConverter {
 
     @Override
-    public List<Branch> jsonToModel(String json) {
+    public Branch jsonToModel(String json) {
         // TODO: 12/31/2020 not implemented by Konrad
         return null;
     }
 
     @Override
-    public String modelToJson(List<Branch> branches) {
+    public String modelToJson(Branch branch) {
         // TODO: 12/31/2020 not implemented by Konrad
         return null;
     }

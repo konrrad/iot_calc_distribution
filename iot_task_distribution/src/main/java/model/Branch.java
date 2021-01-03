@@ -3,16 +3,16 @@ package model;
 import java.util.List;
 
 public class Branch {
-    private final List<Processing> processings;
+    private final Processing processing;
     private final List<Machine> machines;
 
-    public Branch(List<Processing> processings, List<Machine> machines) {
-        this.processings = processings;
+    public Branch(Processing processing, List<Machine> machines) {
+        this.processing = processing;
         this.machines = machines;
     }
 
-    public List<Processing> getProcessings() {
-        return processings;
+    public Processing getProcessings() {
+        return processing;
     }
 
     public List<Machine> getMachines() {

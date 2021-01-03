@@ -11,13 +11,13 @@ public class LocalDataConverter implements DataConverter {
     private final Gson gson = new Gson();
 
     @Override
-    public List<Branch> jsonToModel(String json) {
-        Type type = new TypeToken<List<Branch>>(){}.getType();
+    public Branch jsonToModel(String json) {
+        Type type = new TypeToken<Branch>(){}.getType();
         return gson.fromJson(json, type);
     }
 
     @Override
-    public String modelToJson(List<Branch> branches) {
-        return gson.toJson(branches);
+    public String modelToJson(Branch branch) {
+        return gson.toJson(branch);
     }
 }
