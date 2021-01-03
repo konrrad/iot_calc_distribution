@@ -2,13 +2,12 @@ package model;
 
 import javax.vecmath.Vector3d;
 
-public class Process extends Vertex{
+public class Process extends Vertex {
 
-    private final int neededRam;
+    private int neededRam;
 
-    public Process(Vector3d location, int neededRam) {
-        super(location);
-        this.neededRam = neededRam;
+    public Process() {
+        super();
     }
 
     public int getNeededRam() {

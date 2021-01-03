@@ -1,3 +1,4 @@
+import model.Branch;
 import services.data_converters.DataConverter;
 import services.fdg_iterators.FdgIterator;
 
@@ -13,6 +14,7 @@ public class App {
     }
 
     String run(String inputData) {
+        Branch parsedData = localDataConverter.jsonToModel(inputData);
         // TODO: 12/31/2020 not implemented
         return null;
     }
