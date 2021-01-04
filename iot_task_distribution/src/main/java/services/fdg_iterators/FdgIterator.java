@@ -5,8 +5,6 @@ import services.fdg_iterators.displacement_writers.DisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2MDisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 
-import java.util.List;
-
 public abstract class FdgIterator {
     protected Branch branch;
     protected final DisplacementWriter m2pDisplacementWriter;

@@ -13,4 +13,12 @@ public class Branch {
     public List<Machine> getMachines() {
         return machines;
     }
+
+    public int processesCount() {
+        return processing.getProcesses().size();
+    }
+
+    public int machinesCount() {
+        return machines.size();
+    }
 }
