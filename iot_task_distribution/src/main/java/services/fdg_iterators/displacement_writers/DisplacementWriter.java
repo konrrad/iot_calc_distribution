@@ -2,6 +2,7 @@ package services.fdg_iterators.displacement_writers;
 
 import model.Vertex;
 
+import javax.vecmath.Vector2d;
 import javax.vecmath.Vector3d;
 
 public abstract class DisplacementWriter {
@@ -21,26 +22,26 @@ public abstract class DisplacementWriter {
         return -(optimalDistance * optimalDistance) / delta;
     }
 
-    protected Vector3d calcRepForcesSum(Vector3d v, Vector3d delta) {
-        double x = v.getX() + (delta.getX() / delta.length()) * repulsiveForce(delta.length());
-        double y = v.getY() + (delta.getY() / delta.length()) * repulsiveForce(delta.length());
-        double z = v.getZ() + (delta.getZ() / delta.length()) * repulsiveForce(delta.length());
-        return new Vector3d(x, y, z);
+    protected Vector2d calcRepForcesSum(Vector2d v, Vector2d delta) {
+        delta.normalize();
+        delta.scale(repulsiveForce(delta.length()));
+        v.add(delta);
+        return new Vector2d(v);
     }
 
 
-    protected Vector3d calcAttrForcesSum(Vector3d v, Vector3d delta) {
-        double x = v.getX() + (delta.getX() / delta.length()) * attrForce(delta.length());
-        double y = v.getY() + (delta.getY() / delta.length()) * attrForce(delta.length());
-        double z = v.getZ() + (delta.getZ() / delta.length()) * attrForce(delta.length());
-        return new Vector3d(x, y, z);
+    protected Vector2d calcAttrForcesSum(Vector2d v, Vector2d delta) {
+        delta.normalize();
+        delta.scale(attrForce(delta.length()));
+        v.add(delta);
+        return new Vector2d(v);
     }
 
-    protected Vector3d calcAttrForcesSub(Vector3d v, Vector3d delta) {
-        double x = v.getX() - (delta.getX() / delta.length()) * attrForce(delta.length());
-        double y = v.getY() - (delta.getY() / delta.length()) * attrForce(delta.length());
-        double z = v.getZ() - (delta.getZ() / delta.length()) * attrForce(delta.length());
-        return new Vector3d(x, y, z);
+    protected Vector2d calcAttrForcesSub(Vector2d v, Vector2d delta) {
+        delta.normalize();
+        delta.scale(attrForce(delta.length()));
+        v.sub(delta);
+        return new Vector2d(v);
     }
 
     public abstract void writeAttrDisplacement(Vertex v1, Vertex v2);

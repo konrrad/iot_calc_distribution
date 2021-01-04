@@ -13,7 +13,7 @@ public class SimpleFdgIterator extends FdgIterator {
     @Override
     protected void writeAttrDisplacements() {
         for (Machine m : branch.getMachines()) {
-            m.getDisplacement().set(0, 0, 0);
+            m.getDisplacement().set(0, 0);
             for (Machine nM : branch.getMachines()) {
                 if (m != nM) {
                     m2mDisplacementWriter.writeAttrDisplacement(m, nM);
@@ -21,7 +21,7 @@ public class SimpleFdgIterator extends FdgIterator {
             }
         }
         for (Machine m : branch.getMachines()) {
-            m.getDisplacement().set(0, 0, 0);
+            m.getDisplacement().set(0, 0);
             for (Process p : branch.getProcessing().getProcesses()) {
                 m2pDisplacementWriter.writeAttrDisplacement(m, p);
             }
@@ -31,7 +31,7 @@ public class SimpleFdgIterator extends FdgIterator {
     @Override
     protected void writeRepDisplacements() {
         for (Machine m : branch.getMachines()) {
-            m.getDisplacement().set(0, 0, 0);
+            m.getDisplacement().set(0, 0);
             for (Machine nM : branch.getMachines()) {
                 if (m != nM) {
                     m2mDisplacementWriter.writeRepDisplacement(m, nM);
@@ -39,7 +39,7 @@ public class SimpleFdgIterator extends FdgIterator {
             }
         }
         for (Machine m : branch.getMachines()) {
-            m.getDisplacement().set(0, 0, 0);
+            m.getDisplacement().set(0, 0);
             for (Process p : branch.getProcessing().getProcesses()) {
                 m2pDisplacementWriter.writeRepDisplacement(m, p);
             }
