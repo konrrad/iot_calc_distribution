@@ -7,8 +7,8 @@ import javax.vecmath.Vector3d;
 
 public class M2PDisplacementWriter extends DisplacementWriter {
 
-    public M2PDisplacementWriter() {
-        super(10);
+    public M2PDisplacementWriter(double optimalDistance) {
+        super(optimalDistance);
     }
 
     @Override

@@ -21,4 +21,8 @@ public class Branch {
     public int machinesCount() {
         return machines.size();
     }
+
+    public int verticesCount() {
+        return processesCount() + machinesCount();
+    }
 }

@@ -6,8 +6,8 @@ import model.Process;
 
 public class SimpleFdgIterator extends FdgIterator {
 
-    public SimpleFdgIterator() {
-        super();
+    public SimpleFdgIterator(Branch branch) {
+        super(branch);
     }
 
     @Override

@@ -5,20 +5,25 @@ import services.fdg_iterators.displacement_writers.DisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2MDisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 
+import static java.lang.Math.*;
+
 public abstract class FdgIterator {
-    protected Branch branch;
+    protected final Branch branch;
     protected final DisplacementWriter m2pDisplacementWriter;
     protected final DisplacementWriter m2mDisplacementWriter;
     private final int iterationsCount;
 
-    public FdgIterator(DisplacementWriter m2pDisplacementWriter, DisplacementWriter m2mDisplacementWriter, int iterationsCount) {
-        this.m2pDisplacementWriter = m2pDisplacementWriter;
-        this.m2mDisplacementWriter = m2mDisplacementWriter;
+    public FdgIterator(Branch branch, int iterationsCount) {
+        double optimalDistanceM2M = sqrt(100.0 / branch.verticesCount());
+        double optimalDistanceM2P = sqrt(100.0 / pow(branch.verticesCount(), 3));
+        this.branch = branch;
+        this.m2pDisplacementWriter = new M2PDisplacementWriter(optimalDistanceM2P);
+        this.m2mDisplacementWriter = new M2MDisplacementWriter(optimalDistanceM2M);
         this.iterationsCount = iterationsCount;
     }
 
-    public FdgIterator() {
-        this(new M2PDisplacementWriter(), new M2MDisplacementWriter(), 100);
+    public FdgIterator(Branch branch) {
+        this(branch, 100);
     }
 
     public void doIterations() {
@@ -40,7 +45,4 @@ public abstract class FdgIterator {
         return branch;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
-    }
 }
