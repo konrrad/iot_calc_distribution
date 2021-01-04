@@ -7,7 +7,7 @@ import javax.vecmath.Vector3d;
 public class M2PDisplacementWriter extends DisplacementWriter {
 
     public M2PDisplacementWriter() {
-        super(1);
+        super(10);
     }
 
     @Override

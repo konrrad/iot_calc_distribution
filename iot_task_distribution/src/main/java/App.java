@@ -15,7 +15,8 @@ public class App {
 
     String run(String inputData) {
         Branch parsedData = localDataConverter.jsonToModel(inputData);
-        // TODO: 12/31/2020 not implemented
+        fdgIterator.setBranch(parsedData);
+        fdgIterator.doIterations();
         return localDataConverter.modelToJson(parsedData);
     }
 }

@@ -2,25 +2,33 @@ package services.fdg_iterators.displacement_writers;
 
 import model.Vertex;
 
+import javax.vecmath.Vector3d;
+
 public class M2MDisplacementWriter extends DisplacementWriter {
 
 
     public M2MDisplacementWriter() {
-        super(5);
+        super(50);
     }
 
     @Override
     public void writeAttrDisplacement(Vertex v1, Vertex v2) {
-        // TODO: 12/31/2020 not implemented by Staszek
+        Vector3d delta = new Vector3d(v1.getLocation());
+        delta.sub(v2.getLocation());
+        v1.getDisplacement().set(calcAttrForcesSub(v1.getLocation(), delta));
+        v2.getDisplacement().set(calcAttrForcesSum(v2.getLocation(), delta));
     }
 
     @Override
     public void writeRepDisplacement(Vertex v1, Vertex v2) {
-        // TODO: 12/31/2020 not implemented by Staszek
+        Vector3d delta = new Vector3d(v1.getLocation());
+        delta.sub(v2.getLocation());
+        v1.getDisplacement().set(calcRepForcesSum(v1.getLocation(), delta));
     }
 
     @Override
     public void updateLocation(Vertex v) {
-        // TODO: 12/31/2020 not implemented by Staszek
+        v.getDisplacement().normalize();
+        v.getLocation().add(v.getDisplacement());
     }
 }

@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         String inputData = readFile(args[0]);
         String simulationData = new App(
-                new SimpleFdgIterator(null),
+                new SimpleFdgIterator(),
                 new LocalDataConverter(),
                 new SimulationDataConverter()
         ).run(inputData);
