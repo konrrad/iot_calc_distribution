@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Branch {
@@ -24,5 +25,12 @@ public class Branch {
 
     public int verticesCount() {
         return processesCount() + machinesCount();
+    }
+
+    public List<Vertex> getAllVertices() {
+        var all = new ArrayList<Vertex>();
+        all.addAll(processing.getProcesses());
+        all.addAll(machines);
+        return all;
     }
 }

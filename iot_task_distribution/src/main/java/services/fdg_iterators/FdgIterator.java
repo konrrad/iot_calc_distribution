@@ -32,6 +32,14 @@ public abstract class FdgIterator {
             writeAttrDisplacements();
             updateLocations();
         }
+        clearDisplacements();
+    }
+
+    private void clearDisplacements() {
+        branch.getAllVertices().forEach(v -> {
+            v.getDisplacement().setX(0);
+            v.getDisplacement().setY(0);
+        });
     }
 
 
