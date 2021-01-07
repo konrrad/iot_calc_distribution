@@ -1,9 +1,6 @@
 package model;
 
 import javax.vecmath.Vector2d;
-import javax.vecmath.Vector3d;
-import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.StrictMath.random;
 

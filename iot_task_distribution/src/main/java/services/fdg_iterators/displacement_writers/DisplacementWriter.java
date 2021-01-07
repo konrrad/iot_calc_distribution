@@ -25,23 +25,26 @@ public abstract class DisplacementWriter {
     protected Vector2d calcRepForcesSum(Vector2d v, Vector2d delta) {
         delta.normalize();
         delta.scale(repulsiveForce(delta.length()));
-        v.add(delta);
-        return new Vector2d(v);
+        var displacement = new Vector2d(v);
+        displacement.add(delta);
+        return displacement;
     }
 
 
     protected Vector2d calcAttrForcesSum(Vector2d v, Vector2d delta) {
         delta.normalize();
         delta.scale(attrForce(delta.length()));
-        v.add(delta);
-        return new Vector2d(v);
+        var displacement = new Vector2d(v);
+        displacement.add(delta);
+        return displacement;
     }
 
     protected Vector2d calcAttrForcesSub(Vector2d v, Vector2d delta) {
         delta.normalize();
         delta.scale(attrForce(delta.length()));
-        v.sub(delta);
-        return new Vector2d(v);
+        var displacement = new Vector2d(v);
+        displacement.sub(delta);
+        return displacement;
     }
 
     public abstract void writeAttrDisplacement(Vertex v1, Vertex v2);

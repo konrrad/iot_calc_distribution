@@ -14,15 +14,16 @@ public class M2MDisplacementWriter extends DisplacementWriter {
     public void writeAttrDisplacement(Vertex v1, Vertex v2) {
         Vector2d delta = new Vector2d(v1.getLocation());
         delta.sub(v2.getLocation());
-        v1.getDisplacement().set(calcAttrForcesSub(v1.getLocation(), delta));
-        v2.getDisplacement().set(calcAttrForcesSum(v2.getLocation(), delta));
+        v1.getDisplacement().set(calcAttrForcesSub(v1.getDisplacement(), delta));
+        v2.getDisplacement().set(calcAttrForcesSum(v2.getDisplacement(), delta));
     }
 
     @Override
     public void writeRepDisplacement(Vertex v1, Vertex v2) {
         Vector2d delta = new Vector2d(v1.getLocation());
         delta.sub(v2.getLocation());
-        v1.getDisplacement().set(calcRepForcesSum(v1.getLocation(), delta));
+        v1.getDisplacement().set(calcRepForcesSum(v1.getDisplacement(), delta));
+        System.out.println("nic");
     }
 
     @Override
