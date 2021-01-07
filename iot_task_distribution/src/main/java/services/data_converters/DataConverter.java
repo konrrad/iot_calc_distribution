@@ -1,10 +1,8 @@
 package services.data_converters;
 
-import model.Branch;
-
-import java.util.List;
+import model.Frame;
 
 public interface DataConverter {
-    Branch jsonToModel(String json);
-    String modelToJson(Branch branch);
+    Frame jsonToModel(String json);
+    String modelToJson(Frame frame);
 }

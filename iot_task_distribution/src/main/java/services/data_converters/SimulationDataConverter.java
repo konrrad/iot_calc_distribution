@@ -1,19 +1,17 @@
 package services.data_converters;
 
-import model.Branch;
-
-import java.util.List;
+import model.Frame;
 
 public class SimulationDataConverter implements DataConverter {
 
     @Override
-    public Branch jsonToModel(String json) {
+    public Frame jsonToModel(String json) {
         // TODO: 12/31/2020 not implemented by Konrad
         return null;
     }
 
     @Override
-    public String modelToJson(Branch branch) {
+    public String modelToJson(Frame frame) {
         // TODO: 12/31/2020 not implemented by Konrad
         return null;
     }

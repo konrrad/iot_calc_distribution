@@ -1,29 +1,30 @@
 package services.fdg_iterators;
 
-import model.Branch;
+import model.Frame;
 import services.fdg_iterators.displacement_writers.DisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2MDisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public abstract class FdgIterator {
-    protected final Branch branch;
+    protected final Frame frame;
     protected final DisplacementWriter m2pDisplacementWriter;
     protected final DisplacementWriter m2mDisplacementWriter;
     private final int iterationsCount;
 
-    public FdgIterator(Branch branch, int iterationsCount) {
-        double optimalDistanceM2M = sqrt(100.0 / branch.verticesCount());
-        double optimalDistanceM2P = sqrt(100.0 / pow(branch.verticesCount(), 3));
-        this.branch = branch;
+    public FdgIterator(Frame frame, int iterationsCount) {
+        double optimalDistanceM2M = sqrt(100.0 / frame.branch.verticesCount());
+        double optimalDistanceM2P = sqrt(100.0 / pow(frame.branch.verticesCount(), 3));
+        this.frame = frame;
         this.m2pDisplacementWriter = new M2PDisplacementWriter(optimalDistanceM2P);
         this.m2mDisplacementWriter = new M2MDisplacementWriter(optimalDistanceM2M);
         this.iterationsCount = iterationsCount;
     }
 
-    public FdgIterator(Branch branch) {
-        this(branch, 100);
+    public FdgIterator(Frame frame) {
+        this(frame, 100);
     }
 
     public void doIterations() {
@@ -36,7 +37,7 @@ public abstract class FdgIterator {
     }
 
     private void clearDisplacements() {
-        branch.getAllVertices().forEach(v -> {
+        frame.branch.getAllVertices().forEach(v -> {
             v.getDisplacement().setX(0);
             v.getDisplacement().setY(0);
         });
@@ -48,9 +49,5 @@ public abstract class FdgIterator {
     protected abstract void writeRepDisplacements();
 
     protected abstract void updateLocations();
-
-    public Branch getBranch() {
-        return branch;
-    }
 
 }

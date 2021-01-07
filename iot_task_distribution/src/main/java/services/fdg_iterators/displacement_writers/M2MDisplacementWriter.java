@@ -23,7 +23,6 @@ public class M2MDisplacementWriter extends DisplacementWriter {
         Vector2d delta = new Vector2d(v1.getLocation());
         delta.sub(v2.getLocation());
         v1.getDisplacement().set(calcRepForcesSum(v1.getDisplacement(), delta));
-        System.out.println("nic");
     }
 
     @Override

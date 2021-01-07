@@ -1,4 +1,4 @@
-import model.Branch;
+import model.Frame;
 import services.data_converters.DataConverter;
 import services.fdg_iterators.FdgIterator;
 import services.fdg_iterators.SimpleFdgIterator;
@@ -13,7 +13,7 @@ public class App {
     }
 
     String run(String inputData) {
-        Branch parsedData = localDataConverter.jsonToModel(inputData);
+        Frame parsedData = localDataConverter.jsonToModel(inputData);
         FdgIterator fdgIterator = new SimpleFdgIterator(parsedData);
         fdgIterator.doIterations();
         return localDataConverter.modelToJson(parsedData);

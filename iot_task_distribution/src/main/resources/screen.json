@@ -1,0 +1,33 @@
+{
+  "width": 100,
+  "height": 100,
+  "branch": {
+    "processing": {
+      "processes": [
+        {
+          "neededRam": 5
+        },
+        {
+          "neededRam": 300
+        },
+        {
+          "neededRam": 800
+        }
+      ]
+    },
+    "machines": [
+      {
+        "ram": 10,
+        "type": "USER"
+      },
+      {
+        "ram": 500,
+        "type": "FOG"
+      },
+      {
+        "ram": 1000,
+        "type": "CLOUD"
+      }
+    ]
+  }
+}
