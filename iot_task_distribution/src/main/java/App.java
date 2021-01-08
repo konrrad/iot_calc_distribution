@@ -1,5 +1,6 @@
 import model.Frame;
 import services.data_converters.DataConverter;
+import services.data_converters.GeoGebraConverter;
 import services.fdg_iterators.FdgIterator;
 import services.fdg_iterators.SimpleFdgIterator;
 
@@ -16,6 +17,7 @@ public class App {
         Frame parsedData = localDataConverter.jsonToModel(inputData);
         FdgIterator fdgIterator = new SimpleFdgIterator(parsedData);
         fdgIterator.doIterations();
-        return localDataConverter.modelToJson(parsedData);
+//        return localDataConverter.modelToJson(parsedData);
+        return new GeoGebraConverter().modelToJson(parsedData);
     }
 }

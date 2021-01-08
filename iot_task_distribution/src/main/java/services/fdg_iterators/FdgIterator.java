@@ -5,8 +5,9 @@ import services.fdg_iterators.displacement_writers.DisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2MDisplacementWriter;
 import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 
-import static java.lang.Math.pow;
-import static java.lang.Math.sqrt;
+import javax.vecmath.Vector2d;
+
+import static java.lang.Math.random;
 
 public abstract class FdgIterator {
     protected final Frame frame;
@@ -15,11 +16,9 @@ public abstract class FdgIterator {
     private final int iterationsCount;
 
     public FdgIterator(Frame frame, int iterationsCount) {
-        double optimalDistanceM2M = sqrt(100.0 / frame.branch.verticesCount());
-        double optimalDistanceM2P = sqrt(100.0 / pow(frame.branch.verticesCount(), 3));
         this.frame = frame;
-        this.m2pDisplacementWriter = new M2PDisplacementWriter(optimalDistanceM2P);
-        this.m2mDisplacementWriter = new M2MDisplacementWriter(optimalDistanceM2M);
+        this.m2pDisplacementWriter = M2PDisplacementWriter.of(frame);
+        this.m2mDisplacementWriter = M2MDisplacementWriter.of(frame);
         this.iterationsCount = iterationsCount;
     }
 
@@ -28,21 +27,28 @@ public abstract class FdgIterator {
     }
 
     public void doIterations() {
+        initialize();
         for (int iterationNum = 0; iterationNum < iterationsCount; iterationNum++) {
             writeRepDisplacements();
             writeAttrDisplacements();
             updateLocations();
+            cool();
         }
         clearDisplacements();
     }
 
-    private void clearDisplacements() {
-        frame.branch.getAllVertices().forEach(v -> {
-            v.getDisplacement().setX(0);
-            v.getDisplacement().setY(0);
-        });
+    private void cool() {
+        m2mDisplacementWriter.cool();
+        m2pDisplacementWriter.cool();
     }
 
+    private void clearDisplacements() {
+        frame.branch.getAllVertices().forEach(v -> v.getDisplacement().set(0, 0));
+    }
+
+    protected void initialize() {
+        frame.branch.getAllVertices().forEach(v -> v.getLocation().add(new Vector2d(random()* frame.width, random()* frame.height)));
+    }
 
     protected abstract void writeAttrDisplacements();
 

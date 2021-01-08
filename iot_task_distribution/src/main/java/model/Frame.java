@@ -1,15 +1,19 @@
 package model;
 
-public class Frame {
-    public final double width;
-    public final double height;
-    public final double temp;
-    public final Branch branch;
+import static java.lang.Math.sqrt;
 
-    public Frame(int width, int height, double temp, Branch branch) {
-        this.width = width;
-        this.height = height;
-        this.temp = temp;
-        this.branch = branch;
+public class Frame {
+    public double width;
+    public double height;
+    public double temp;
+    public Branch branch;
+
+    public Double getOptimalDistance(double factor) {
+        double optimalDistance = sqrt(width*height / branch.verticesCount());
+        return factor * optimalDistance;
+    }
+
+    public Double getOptimalDistance() {
+        return getOptimalDistance(1);
     }
 }

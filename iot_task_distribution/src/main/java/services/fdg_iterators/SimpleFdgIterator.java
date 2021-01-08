@@ -13,7 +13,6 @@ public class SimpleFdgIterator extends FdgIterator {
     @Override
     protected void writeAttrDisplacements() {
         for (Machine m : frame.branch.getMachines()) {
-            m.getDisplacement().set(0, 0);
             for (Machine nM : frame.branch.getMachines()) {
                 if (m != nM) {
                     m2mDisplacementWriter.writeAttrDisplacement(m, nM);
@@ -21,7 +20,6 @@ public class SimpleFdgIterator extends FdgIterator {
             }
         }
         for (Machine m : frame.branch.getMachines()) {
-            m.getDisplacement().set(0, 0);
             for (Process p : frame.branch.getProcessing().getProcesses()) {
                 m2pDisplacementWriter.writeAttrDisplacement(m, p);
             }
@@ -37,12 +35,10 @@ public class SimpleFdgIterator extends FdgIterator {
                     m2mDisplacementWriter.writeRepDisplacement(m, nM);
                 }
             }
-        }
-        for (Machine m : frame.branch.getMachines()) {
-            m.getDisplacement().set(0, 0);
             for (Process p : frame.branch.getProcessing().getProcesses()) {
                 m2pDisplacementWriter.writeRepDisplacement(m, p);
             }
+
         }
     }
 
@@ -51,8 +47,8 @@ public class SimpleFdgIterator extends FdgIterator {
         for (Machine m : frame.branch.getMachines()) {
             m2mDisplacementWriter.updateLocation(m);
         }
-        for (Process m : frame.branch.getProcessing().getProcesses()) {
-            m2pDisplacementWriter.updateLocation(m);
+        for (Process p : frame.branch.getProcessing().getProcesses()) {
+            m2pDisplacementWriter.updateLocation(p);
         }
     }
 }
