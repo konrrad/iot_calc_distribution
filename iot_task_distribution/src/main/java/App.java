@@ -17,7 +17,7 @@ public class App {
         Frame parsedData = localDataConverter.jsonToModel(inputData);
         FdgIterator fdgIterator = new SimpleFdgIterator(parsedData);
         fdgIterator.doIterations();
-//        return localDataConverter.modelToJson(parsedData);
-        return new GeoGebraConverter().modelToJson(parsedData);
+        return localDataConverter.modelToJson(parsedData);
+//        return new GeoGebraConverter().modelToJson(parsedData);
     }
 }

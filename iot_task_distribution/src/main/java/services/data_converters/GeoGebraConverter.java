@@ -30,6 +30,7 @@ public class GeoGebraConverter implements DataConverter {
             builder
                     .append("\"")
                     .append(m.getType().toString().charAt(0))
+                    .append(i)
                     .append(" = ")
                     .append(m.getLocation())
                     .append("\",");
