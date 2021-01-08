@@ -6,8 +6,6 @@ import model.Vertex;
 import javax.vecmath.Vector2d;
 
 import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static services.utils.VectorUtils.normalize;
 
 public class DisplacementWriter {
 
@@ -31,67 +29,47 @@ public class DisplacementWriter {
     }
 
     public double repulsiveForce(double delta) {
-        delta = max(delta, 0.1);
         return (optimalDistance * optimalDistance) / delta;
     }
 
-    protected Vector2d calcRepForcesSum(Vector2d v, Vector2d delta) {
-        var deltaLength = delta.length();
-        normalize(delta);
-        delta.scale(repulsiveForce(deltaLength));
-        var displacement = new Vector2d(v);
-        displacement.add(delta);
-        return displacement;
-    }
-
-
-    protected Vector2d calcAttrForcesSum(Vector2d v, Vector2d delta) {
-        var deltaLength = delta.length();
-        normalize(delta);
-        delta.scale(attrForce(deltaLength));
-        var displacement = new Vector2d(v);
-        displacement.add(delta);
-        return displacement;
-    }
-
-    protected Vector2d calcAttrForcesSub(Vector2d v, Vector2d delta) {
-        var deltaLength = delta.length();
-        normalize(delta);
-        delta.scale(attrForce(deltaLength));
-        var displacement = new Vector2d(v);
-        displacement.sub(delta);
-        return displacement;
-    }
-
     public void writeAttrDisplacement(Vertex v1, Vertex v2) {
-        Vector2d delta = new Vector2d(v1.getLocation());
-        delta.sub(v2.getLocation());
-        v1.getDisplacement().set(calcAttrForcesSub(v1.getDisplacement(), new Vector2d(delta)));
-        v2.getDisplacement().set(calcAttrForcesSum(v2.getDisplacement(), new Vector2d(delta)));
+        // normalized difference position vector of v and u
+        Vector2d deltaPos = new Vector2d();
+        deltaPos.sub(v1.getLocation(), v2.getLocation());
+        double length = deltaPos.length();
+        deltaPos.normalize();
+
+        // displacements depending on attractive force
+        deltaPos.scale(attrForce(length));
+
+        v1.getDisplacement().sub(deltaPos);
+        v2.getDisplacement().add(deltaPos);
     }
 
     public void writeRepDisplacement(Vertex v1, Vertex v2) {
-        Vector2d delta = new Vector2d(v1.getLocation());
-        delta.sub(v2.getLocation());
-        v1.getDisplacement().set(calcRepForcesSum(v1.getDisplacement(), new Vector2d(delta)));
+        // normalized difference position vector of v and u
+        Vector2d deltaPos = new Vector2d();
+        deltaPos.sub(v1.getLocation(), v2.getLocation());
+        double length = deltaPos.length();
+        deltaPos.normalize();
+
+        // displacement depending on repulsive force
+        deltaPos.scale(repulsiveForce(length));
+        v1.getDisplacement().add(deltaPos);
     }
 
     public void updateLocation(Vertex v) {
-        var trueDisp = new Vector2d(
-                min(v.getDisplacement().x, temp),
-                min(v.getDisplacement().y, temp)
-        );
-        var disp = v.getDisplacement();
-        normalize(disp);
-        trueDisp.set(
-                disp.x * trueDisp.x,
-                disp.y * trueDisp.y
-        );
-        v.getLocation().add(trueDisp);
-        v.getLocation().set(
-                min(width * 0.5, max(-width / 2, v.getLocation().x)),
-                min(height * 0.5, max(-height / 2, v.getLocation().y))
-        );
+        Vector2d disp = new Vector2d(v.getDisplacement());
+        double length = disp.length();
+
+        // limit maximum displacement by temperature
+        disp.normalize();
+        disp.scale(Math.min(length, temp));
+        v.getLocation().add(disp);
+
+        // prevent being displaced outside the frame
+        v.getLocation().x = Math.min(width, Math.max(0.0, v.getLocation().x));
+        v.getLocation().y = Math.min(width, Math.max(0.0, v.getLocation().y));
     }
 
     public static DisplacementWriter of(Frame frame) {

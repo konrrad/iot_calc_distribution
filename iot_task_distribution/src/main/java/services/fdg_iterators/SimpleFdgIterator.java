@@ -12,15 +12,17 @@ public class SimpleFdgIterator extends FdgIterator {
 
     @Override
     protected void writeAttrDisplacements() {
-        for (Machine m : frame.branch.getMachines()) {
-            for (Machine nM : frame.branch.getMachines()) {
-                if (m != nM) {
-                    m2mDisplacementWriter.writeAttrDisplacement(m, nM);
-                }
-            }
+        var machines = frame.branch.getMachines();
+        var processes = frame.branch.getProcessing().getProcesses();
+
+        for (int i = 0; i < machines.size() - 1; i++) {
+            m2mDisplacementWriter.writeAttrDisplacement(machines.get(i), machines.get(i+1));
         }
-        for (Machine m : frame.branch.getMachines()) {
-            for (Process p : frame.branch.getProcessing().getProcesses()) {
+        for (int i = 0; i < processes.size() - 1; i++) {
+            m2mDisplacementWriter.writeAttrDisplacement(processes.get(i), processes.get(i+1));
+        }
+        for (Machine m : machines) {
+            for (Process p : processes) {
                 m2pDisplacementWriter.writeAttrDisplacement(m, p);
             }
         }
