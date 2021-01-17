@@ -81,4 +81,8 @@ public class DisplacementWriter {
         temp -= temp * 0.05;
         temp = max(0, temp);
     }
+
+    public Double getTemp() {
+        return temp;
+    }
 }
