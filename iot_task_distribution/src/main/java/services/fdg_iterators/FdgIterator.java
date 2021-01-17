@@ -8,6 +8,7 @@ import services.fdg_iterators.displacement_writers.M2PDisplacementWriter;
 import javax.vecmath.Vector2d;
 
 import static java.lang.Math.random;
+import static java.lang.Math.round;
 
 public abstract class FdgIterator {
     protected final Frame frame;
@@ -32,17 +33,23 @@ public abstract class FdgIterator {
         initialize();
         for (int iterationNum = 0; iterationNum < iterationsCount; iterationNum++) {
             doOneIteration(iterationNum);
-
+            printFrame(iterationNum);
         }
         clearDisplacements();
     }
 
-    protected abstract void doOneIteration(int numOfIteration);
+    protected void printFrame(int i) {
+        System.out.print("N: " + i + ", T: "+ m2mDisplacementWriter.getTemp() + " | ");
+        frame.branch.getAllVertices().forEach(v -> System.out.print("(x: "+ round(v.getLocation().x) + ", y: "+round(v.getLocation().y) + ") "));
+        System.out.print("\n");
+    }
 
     protected void cool() {
         m2mDisplacementWriter.cool();
         m2pDisplacementWriter.cool();
     }
+
+    protected abstract void doOneIteration(int numOfIteration);
 
 
     private Frame splitResults(int iterationNum)

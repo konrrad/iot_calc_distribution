@@ -1,7 +1,7 @@
 {
   "width": 100,
   "height": 100,
-  "temp": 10,
+  "temp": 30,
   "branch": {
     "processing": {
       "processes": [
