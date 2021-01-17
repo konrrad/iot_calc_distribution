@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.AppController">
+    <center>
+        <VBox alignment="CENTER">
+            <children>
+                <ScatterChart fx:id="chart">
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                    <xAxis>
+                        <NumberAxis side="BOTTOM"/>
+                    </xAxis>
+                </ScatterChart>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
