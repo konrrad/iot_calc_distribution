@@ -13,13 +13,15 @@ public abstract class FdgIterator {
     protected final Frame frame;
     protected final DisplacementWriter m2pDisplacementWriter;
     protected final DisplacementWriter m2mDisplacementWriter;
-    private final int iterationsCount;
+    protected final int iterationsCount;
+
 
     public FdgIterator(Frame frame, int iterationsCount) {
         this.frame = frame;
         this.m2pDisplacementWriter = M2PDisplacementWriter.of(frame);
         this.m2mDisplacementWriter = M2MDisplacementWriter.of(frame);
         this.iterationsCount = iterationsCount;
+
     }
 
     public FdgIterator(Frame frame) {
@@ -29,17 +31,23 @@ public abstract class FdgIterator {
     public void doIterations() {
         initialize();
         for (int iterationNum = 0; iterationNum < iterationsCount; iterationNum++) {
-            writeRepDisplacements();
-            writeAttrDisplacements();
-            updateLocations();
-            cool();
+            doOneIteration(iterationNum);
+
         }
         clearDisplacements();
     }
 
-    private void cool() {
+    protected abstract void doOneIteration(int numOfIteration);
+
+    protected void cool() {
         m2mDisplacementWriter.cool();
         m2pDisplacementWriter.cool();
+    }
+
+
+    private Frame splitResults(int iterationNum)
+    {
+        return frame;
     }
 
     private void clearDisplacements() {

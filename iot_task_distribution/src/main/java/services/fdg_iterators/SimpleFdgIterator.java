@@ -53,4 +53,12 @@ public class SimpleFdgIterator extends FdgIterator {
             m2pDisplacementWriter.updateLocation(p);
         }
     }
+
+    @Override
+    protected void doOneIteration(int iterationNum) {
+        writeRepDisplacements();
+        writeAttrDisplacements();
+        updateLocations();
+        cool();
+    }
 }

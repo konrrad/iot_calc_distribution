@@ -20,21 +20,24 @@ public class Starter extends Application {
     @Override
     public void start(Stage primaryStage) {
         try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AppController.class.getResource("../view/appView.fxml"));
-            BorderPane layout = loader.load();
+            FXMLLoader fxmlLoader=new FXMLLoader();
+            BorderPane layout = fxmlLoader.load(getClass().getResource("./appView.fxml").openStream());
 
-            String inputData = readFile("src/main/resources/data/frame.json");
-            String simulationData = new App(
-                    new LocalDataConverter(),
-                    new SimulationDataConverter()
-            ).run(inputData);
-            System.out.println(simulationData);
-
+            AppController appController=fxmlLoader.getController();
             Scene scene = new Scene(layout);
             primaryStage.setScene(scene);
             primaryStage.setTitle("iot_task_distribution");
             primaryStage.show();
+
+            String inputData = readFile("src/main/resources/data/frame.json");
+            String simulationData = new App(
+                    new LocalDataConverter(),
+                    new SimulationDataConverter(),
+                    appController
+            ).run(inputData);
+            System.out.println(simulationData);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
