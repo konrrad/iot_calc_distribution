@@ -11,10 +11,14 @@ import static java.lang.Math.random;
 import static java.lang.Math.round;
 
 public abstract class FdgIterator {
+    public Frame getFrame() {
+        return frame;
+    }
+
     protected final Frame frame;
     protected final DisplacementWriter m2pDisplacementWriter;
     protected final DisplacementWriter m2mDisplacementWriter;
-    protected final int iterationsCount;
+    public final int iterationsCount;
 
 
     public FdgIterator(Frame frame, int iterationsCount) {
@@ -52,12 +56,7 @@ public abstract class FdgIterator {
     protected abstract void doOneIteration(int numOfIteration);
 
 
-    private Frame splitResults(int iterationNum)
-    {
-        return frame;
-    }
-
-    private void clearDisplacements() {
+    public void clearDisplacements() {
         frame.branch.getAllVertices().forEach(v -> v.getDisplacement().set(0, 0));
     }
 

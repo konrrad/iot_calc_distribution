@@ -24,18 +24,18 @@ public class Starter extends Application {
             BorderPane layout = fxmlLoader.load(getClass().getResource("./appView.fxml").openStream());
 
             AppController appController=fxmlLoader.getController();
+            appController.setInputData(readFile("src/main/resources/data/frame.json"));
             Scene scene = new Scene(layout);
             primaryStage.setScene(scene);
             primaryStage.setTitle("iot_task_distribution");
             primaryStage.show();
 
-            String inputData = readFile("src/main/resources/data/frame.json");
-            String simulationData = new App(
-                    new LocalDataConverter(),
-                    new SimulationDataConverter(),
-                    appController
-            ).run(inputData);
-            System.out.println(simulationData);
+//            String inputData = readFile("src/main/resources/data/frame.json");
+//            String simulationData = new App(
+//                    new LocalDataConverter(),
+//                    new SimulationDataConverter()
+//            ).run(inputData);
+//            System.out.println(simulationData);
 
 
         } catch (IOException e) {

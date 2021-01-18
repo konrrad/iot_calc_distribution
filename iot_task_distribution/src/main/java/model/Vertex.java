@@ -6,8 +6,8 @@ import static java.lang.StrictMath.random;
 
 
 public abstract class Vertex {
-    private final Vector2d location;
-    private final Vector2d displacement;
+    protected Vector2d location;
+    protected final Vector2d displacement;
 
     public Vertex() {
         location = new Vector2d(random(), random());

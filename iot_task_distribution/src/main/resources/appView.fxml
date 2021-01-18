@@ -14,12 +14,13 @@
     <center>
         <VBox alignment="CENTER">
             <children>
+                <Button fx:id="runButton" onAction="#runFDGIterations" text="RUN"/>
                 <ScatterChart fx:id="chart">
                     <yAxis>
-                        <NumberAxis side="LEFT"/>
+                        <NumberAxis fx:id="yAxis" autoRanging="false" side="LEFT"/>
                     </yAxis>
                     <xAxis>
-                        <NumberAxis side="BOTTOM"/>
+                        <NumberAxis fx:id="xAxis" autoRanging="false" side="BOTTOM"/>
                     </xAxis>
                 </ScatterChart>
             </children>

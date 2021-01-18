@@ -1,23 +1,25 @@
 package services.fdg_iterators;
 
 import model.Frame;
-import services.utils.Visualizer;
+import model.Machine;
+import model.Process;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleFdgIteratorWithVisualization extends SimpleFdgIterator {
-    protected final int splittingInterval;
-    private final Visualizer visualizer;
 
-    public SimpleFdgIteratorWithVisualization(Frame frame, Visualizer visualizer) {
+    public SimpleFdgIteratorWithVisualization(Frame frame) {
         super(frame);
-        this.splittingInterval = iterationsCount / 5;
-        this.visualizer = visualizer;
     }
 
     @Override
-    protected void doOneIteration(int iterationNum) {
+    public void doOneIteration(int iterationNum) {
         super.doOneIteration(iterationNum);
-        visualizer.update(new ArrayList<>(this.frame.branch.getMachines()),new ArrayList<>(this.frame.branch.getProcessing().getProcesses()));
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
     }
 }

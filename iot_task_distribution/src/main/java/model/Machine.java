@@ -25,4 +25,12 @@ public class Machine extends Vertex {
     public List<Process> getPlacedProcesses() {
         return placedProcesses;
     }
+
+    public Machine(Machine m)
+    {
+        super(m.getLocation());
+        this.location=m.location;
+        this.ram=m.ram;
+        this.type=m.type;
+    }
 }
