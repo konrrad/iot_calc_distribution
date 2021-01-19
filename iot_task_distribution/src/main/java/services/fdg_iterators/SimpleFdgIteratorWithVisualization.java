@@ -22,4 +22,9 @@ public class SimpleFdgIteratorWithVisualization extends SimpleFdgIterator {
     public void initialize() {
         super.initialize();
     }
+
+    @Override
+    public void printFrame(int i) {
+        super.printFrame(i);
+    }
 }

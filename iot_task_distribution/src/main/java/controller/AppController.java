@@ -19,6 +19,7 @@ public class AppController {
     private final XYChart.Series<Double, Double> machinesSeries = new XYChart.Series<>();
     private final XYChart.Series<Double, Double> processesSeries = new XYChart.Series<>();
     private final DataConverter localDataConverter = new LocalDataConverter();
+    private static final int ITERATIONS_NUMBER=100;
     @FXML
     public ScatterChart<Double, Double> chart;
     @FXML
@@ -53,7 +54,7 @@ public class AppController {
     }
 
     private void iterate() {
-        AnimationTimer animationTimer = new FDGTimer(fdgIterator,100);
+        AnimationTimer animationTimer = new FDGTimer(fdgIterator,ITERATIONS_NUMBER);
         animationTimer.start();
     }
 
@@ -92,6 +93,7 @@ public class AppController {
                 this.simpleFDGIterator.doOneIteration(iterationCounter);
                 this.iterationCounter++;
                 updateChart(this.simpleFDGIterator.getFrame().branch.getMachines(), this.simpleFDGIterator.getFrame().branch.getProcessing().getProcesses());
+                fdgIterator.printFrame(iterationCounter);
                 this.previousTime = l;
             }
         }
